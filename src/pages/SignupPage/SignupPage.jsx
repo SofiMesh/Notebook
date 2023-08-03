@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import userService from '../../utils/userService'
 import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
-import { useNavigate } from 'react-router-dom';
+import {Link, useNavigate } from 'react-router-dom';
 
 
 import {
@@ -24,8 +24,22 @@ import {
 		passwordConf: ''
 	});
 
+    const [selectedFile, setSelectedFile] = useState('');
+
 	const [error, setError] = useState('');
 	const navigate = useNavigate();
+
+// 	try {
+// 		console.log(formData.forEach((item) => console.log(item)))
+// 		await userService.signup(formData);
+// 		props.handleSignupOrLogin()
+// 		navigate('/')
+// 	} catch (err) {
+// 		console.log(err.message)
+// 		setError(err.message)
+// 	}
+// }
+
 
 	function handleChange(e) {
 		setState({
@@ -34,12 +48,16 @@ import {
 		});
 	}
 
+    function handleFileInput(e){
+        setSelectedFile(e.target.files[0])
+    }
    
 
 	async function handleSubmit(e) {
 		e.preventDefault();
 		// Handle form submission 
         const formData = new FormData();
+        formData.append('photo', selectedFile)
         formData.append('username', state.username)
         formData.append('email', state.email)
         formData.append('password', state.password)	
@@ -95,14 +113,24 @@ import {
 							onChange={handleChange}
 							required
 						/>
+                        <Form.Field>
+                         <Form.Input
+                     type="file"
+                     name="photo"
+                     placeholder="upload image"
+                     onChange={handleFileInput}
+                         />
+                        </Form.Field>
+
 						<Button type="submit" className="button">
 							Sign Up
 						</Button>
 					</Segment>
+                    <Message>You already have an account? <Link to="/login">Login</Link></Message>
+
 					{error ? <ErrorMessage error={error} /> : null}
 				</Form>
 			</Grid.Column>
 		</Grid>
 	);
-}
-
+  }

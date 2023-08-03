@@ -6,7 +6,7 @@ const multer = require('multer');
 const upload = multer()
 
 
-router.post('/', notesCtrl.create)
+router.post('/', upload.single('photo'), postsCtrl.create);
 router.get('/', notesCtrl.index)
 
 

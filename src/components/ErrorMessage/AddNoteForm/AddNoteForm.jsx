@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { Button, Form, Grid, Segment } from "semantic-ui-react";
 
 
-export default fuction AddNoteForm() {
-const [state, setState] = useState({
+export default function AddNoteForm({ handleAddNote }) {
+    const [state, setState] = useState({
     title: "",
     text: ""
-})
+});
 
 
 function handleChange(e){
@@ -17,13 +17,15 @@ function handleChange(e){
   }
 
   function handleSubmit(e) {
+    e.preventDefault();
+
     const formData = new FormData()
     formData.append('title', state.title)
     formData.appent('text', state.text)
 
 
 
-    handleAddPost(formData)
+    handleAddNote(formData)
 }
 
 
@@ -33,6 +35,7 @@ function handleChange(e){
 <Segment>
     <Form onSubmit={handleSubmit}>
        <Form.Input
+       type="text"
         classsName="title"
         name="title"
         value={state.title}
