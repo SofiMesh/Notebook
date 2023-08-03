@@ -16,7 +16,7 @@ import {
   } from "semantic-ui-react";
 
 
-  export default function SignUpPage({ handleSignUpOrLogin }) {
+  export default function SignUpPage({handleSignUpOrLogin}) {
 	const [state, setState] = useState({
 		username: '',
 		email: '',
@@ -34,6 +34,8 @@ import {
 		});
 	}
 
+   
+
 	async function handleSubmit(e) {
 		e.preventDefault();
 		// Handle form submission 
@@ -43,7 +45,7 @@ import {
         formData.append('password', state.password)	
          
         try {
-            const signUp = await userService.signUP(formData)
+            const signUp = await userService.signup(formData)
             console.log(signUp)
             navigate('/');
             handleSignUpOrLogin();

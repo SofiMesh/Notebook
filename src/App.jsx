@@ -23,8 +23,8 @@ if(!user){
   return (
     <Routes>
 
-    <Routes path="/login" element={<LoginPage handleSignUpOrLogin={handleSignUpOrLogin} />} />
-    <Routes path="/signup" element={<LoginPage handleSignUpOrLogin={handleSignUpOrLogin} />} />
+    <Route path="/login" element={<LoginPage handleSignUpOrLogin={handleSignUpOrLogin} />} />
+    <Route path="/signup" element={<SignUpPage handleSignUpOrLogin={handleSignUpOrLogin} />} />
     <Route path="/*" element={<Navigate to='/login' />} />
 
     </Routes>

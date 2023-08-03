@@ -2,11 +2,11 @@ const User = require('../models/user');
 const jwt = require('jsonwebtoken');
 const SECRET = process.env.SECRET;
 
-// const { v4: uuidv4 } = require('uuid');
+const { v4: uuidv4 } = require('uuid');
 // const S3 = require('aws-sdk/clients/s3');
 // const s3 = new S3();
 
-// const BUCKET_NAME = process.env.BUCKET_NAME
+const BUCKET_NAME = process.env.BUCKET_NAME
 
 
 
@@ -45,6 +45,7 @@ async function login(req, res) {
       }
     });
   } catch (err) {
+    console.log(err)
     return res.status(401).json(err);
   }
 }

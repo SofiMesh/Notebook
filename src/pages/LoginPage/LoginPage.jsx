@@ -81,7 +81,7 @@ export default function LoginPage(props){
         </Button>
       </Segment>
       <Message>You don't have an account? <Link to="/signup">Sign Up</Link></Message>
-        {error ? <ErrorMessage error={eror} /> : null}
+        {error ? <ErrorMessage error={error} /> : null}
         </Form>
         </Grid.Column>
         </Grid>
