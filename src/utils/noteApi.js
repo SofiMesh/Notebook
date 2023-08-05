@@ -6,9 +6,8 @@ const BASE_URL = '/api/notes/';
 export function create(data) {
     return fetch(BASE_URL, {
         method: "POST",
-        body: JSON.stringify(data),
+        body: data,
         headers: {
-            "Content-Type": "application/json",
             Authorization: "Bearer " + tokenService.getToken() 
 
         }

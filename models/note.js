@@ -3,9 +3,9 @@ const mongoose = require('mongoose');
 const noteSchema = mongoose.Schema({
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
     title: String,
-    creationDate: Date
+    photoUrl: String,
 })
 
 
 
-module.export =  mongoose.model('Note', noteSchema)
+module.exports =  mongoose.model('Note', noteSchema)

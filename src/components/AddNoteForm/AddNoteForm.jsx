@@ -7,7 +7,8 @@ export default function AddNoteForm({ handleAddNote }) {
     title: "",
     text: ""
 });
-
+const [selectedFile, setSelectedFile] = useState('')
+// console.log(title, text)
 
 function handleChange(e){
     setState({
@@ -15,13 +16,18 @@ function handleChange(e){
         [e.target.name]: e.target.value
     })
   }
+  function handleFileInput(e){
+    setSelectedFile(e.target.files[0])
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
 
     const formData = new FormData()
     formData.append('title', state.title)
-    formData.appent('text', state.text)
+    formData.append('text', state.text)
+    formData.append('photo', selectedFile)
+
 
 
 
@@ -29,13 +35,11 @@ function handleChange(e){
 }
 
 
-
-
     return (
-<Segment>
+        
+ <Segment>
     <Form onSubmit={handleSubmit}>
        <Form.Input
-       type="text"
         classsName="title"
         name="title"
         value={state.title}
@@ -50,12 +54,18 @@ function handleChange(e){
         placeholder="Text Goes Here"
         onChange={handleChange}
         />
-
+<Form.Input
+              className="form-control"
+              type="file"
+              name="photo"
+              placeholder="upload image"
+              onChange={handleFileInput}
+              />
 <Button type="submit" className="btn">
     Add Note
 </Button>
 
     </Form>
-</Segment>
+</Segment> 
     );
 }

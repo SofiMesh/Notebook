@@ -1,12 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const notesCtrl = required('../../controllers/notes');
+const notesCtrl = require('../../controllers/notes');
 
 const multer = require('multer');
 const upload = multer()
 
 
-router.post('/', upload.single('photo'), postsCtrl.create);
+router.post('/', upload.single('photo'), notesCtrl.create);
+router.delete('/notes/:id/', notesCtrl.delete)
 router.get('/', notesCtrl.index)
 
 
