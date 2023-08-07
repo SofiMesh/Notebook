@@ -2,64 +2,74 @@ import { useState, useEffect } from "react";
 import PageHeader from "../../components/Header/Header";
 import * as noteApi from "../../utils/noteApi";
 import { Grid } from "semantic-ui-react";
+
 import AddNoteForm from "../../components/AddNoteForm/AddNoteForm";
-import NoteGallery from "../../components/NoteGallery/NoteGallery"
+import NoteGallery from "../../components/NoteGallery/NoteGallery";
 
-export default function FeedPage({user}) {
-    const [notes, setNotes] = useState([]);
-    const [error, setError] = useState("");
+export default function FeedPage({ user, handleLogout }) {
+    const [state, setState] = useState({
+        notes: [],
+        error: "",
+    });
 
-
-
-
-    //CRUD- create
-    async function handleAddNote(data) {
-        try {
-            const responseData = await notesApi.create(data);
-            console.log(responseData);
-            setNotes([responseData.data, ...notes]);
-        } catch (err) {
-            console.log(err, "err in handleAddPost FeedPage");
-            setError("Error Creating a Post");
-        }
-    }
-
-    //CRUD-read
-    async function getNotes() {
-        try {
-            const responseFromTheServer = await noteApi.getAll();
-            console.log(responseFromTheServer);
-            setNotes(responseFromTheServer.note);
-        } catch (err) {
-            console.log(err, "error in getNotes");
-            setError("Error Fetching Notes, Check terminal");
-        }
-    }
-
+    const { notes, error } = state;
 
     useEffect(() => {
+        
+
         getNotes();
     }, []);
+    async function getNotes() {
+        try {
+            const responseData = await noteApi.getAll();
+            setState((prevState) => ({
+                ...prevState,
+                notes: responseData.note,
+            }));
+        } catch (err) {
+            setState((prevState) => ({
+                ...prevState,
+                error: "Error Fetching Notes, Check terminal",
+            }));
+            console.log(err, "error in getNotes");
+        }
+    }
+    async function handleAddNote(data) {
+        try {
+            const responseData = await noteApi.create(data);
+            setState((prevState) => ({
+                ...prevState,
+                notes: [responseData.data, ...prevState.notes],
+            }));
+        } catch (err) {
+            setState((prevState) => ({
+                ...prevState,
+                error: "Error Creating a Note",
+            }));
+            console.log(err, "err in handleAddNote");
+        }
+    }
+
+    async function handleDeleteNote(noteId) {
+        try {
+            await noteApi.remove(noteId);
+           getNotes()
+        } catch (err) {
+            setState((prevState) => ({
+                ...prevState,
+                error: "Error Deleting a Note",
+            }));
+            console.log(err, "err in handleDeleteNote");
+        }
+    }
 
     return (
-
-        <Grid >
-            <Grid.Row>
-                <Grid.Column>
-                    <PageHeader />
-                </Grid.Column>
-            </Grid.Row>
-            <Grid.Row>
-                <Grid.Column style={{ maxWidth: 450 }}>
-                    <AddNoteForm handleAddNote={handleAddNote} />
-                </Grid.Column>
-            </Grid.Row>
-            <Grid.Row>
-                <Grid.Column style={{ maxWidth: 450 }}>
-                 <NoteGallery notes={notes} />
-                </Grid.Column>
-            </Grid.Row>
-        </Grid>
-
-    )
+        <>
+            <Grid>
+                <NoteGallery notes={notes} handleDeleteNote={handleDeleteNote} />
+                <PageHeader handleLogout={handleLogout} user={user} />
+                <AddNoteForm user={user} handleAddNote={handleAddNote} />
+            </Grid>
+        </>
+    );
 }

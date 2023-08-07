@@ -1,25 +1,19 @@
 import React from "react";
-import { Card, Image } from "semantic-ui-react";
+import { Card, Image, Button, Header } from "semantic-ui-react";
 
-export default function AllNotes({ note }) {
+export default function Allnotes({ note, user, handleDeleteNote }) {
+
+
   return (
-    <Card key={note._id}>
-      <Card.Content textAlign="left">
-        <Image
-          floated="left"
-          size="large"
-          avatar
-          src={
-            note.user.photoUrl || "https://react.semantic-ui.com/images/wireframe/square-image.png"
-          }
-        />
-        <Card.Header floated="right">{note.user.username}</Card.Header>
-      </Card.Content>
-
-      <Image src={note.photoUrl} wrapped ui={false} />
-      <Card.Content>
-        <Card.Description>{note.text}</Card.Description>
-      </Card.Content>
-    </Card>
-  );
+    <>
+      <Header>{note.user.username}</Header>
+      <Card key={note._id}>
+        <Card.Content textAlign="left">
+          <Card.Header>{note.title}</Card.Header>
+          <Card.Description>{note.text}</Card.Description>
+          <Button onClick={ () => handleDeleteNote(note._id)}>X</Button>
+        </Card.Content>
+      </Card>
+    </>
+  )
 }

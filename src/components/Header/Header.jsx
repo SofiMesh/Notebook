@@ -1,19 +1,22 @@
 import { Header, Segment, Image, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import './Header.css'
 
 
 
 
-export default function PageHeader({user}) {
-    return(
-      <Segment clearing>
-      <Header as="h2" floated="right">
+
+
+export default function PageHeader({ user, handleLogout }) {
+  return (
+    <Segment clearing>
+      <Header as="h2" >
         <Link to="/">
           <Icon name="home"></Icon>
         </Link>
-        {/* <Link to="" onClick={handleLogout}>
+        <Link to="" onClick={handleLogout}>
           Logout
-        </Link> */}
+        </Link>
       </Header>
       <Header as="h2" floated="left">
         <Link to={`/${user?.username}`}>
@@ -27,6 +30,6 @@ export default function PageHeader({user}) {
           ></Image>
         </Link>
       </Header>
-      </Segment>
-    )
+    </Segment>
+  )
 }
