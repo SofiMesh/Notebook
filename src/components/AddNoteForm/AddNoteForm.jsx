@@ -22,10 +22,11 @@ export default function AddNoteForm({ handleAddNote }) {
       title: state.title,
       text: state.text
     });
+    setState({ title: "", text: ""})
   }
 
   return (
-    <Segment>
+    <Segment attached="top" color="olive">
       <Form onSubmit={handleSubmit}>
         <Form.Input
           className="title"
@@ -35,15 +36,16 @@ export default function AddNoteForm({ handleAddNote }) {
           onChange={handleChange}
         />
 
-        <Form.TextArea
+        <Form.TextArea 
           className="text"
           name="text"
           value={state.text}
           placeholder="Text Goes Here"
           onChange={handleChange}
+          
         />
 
-        <Button type="submit" className="btn">
+        <Button type="submit" className="btn" color="green">
           Add Note
         </Button>
       </Form>

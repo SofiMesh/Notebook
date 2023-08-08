@@ -9,12 +9,12 @@ import './Header.css'
 
 export default function PageHeader({ user, handleLogout }) {
   return (
-    <Segment clearing>
-      <Header as="h2" >
+    <Segment clearing color="olive" tertiary>
+      <Header as="h2" floated="right" >
         <Link to="/">
           <Icon name="home"></Icon>
         </Link>
-        <Link to="" onClick={handleLogout}>
+        <Link to="" onClick={handleLogout} >
           Logout
         </Link>
       </Header>
