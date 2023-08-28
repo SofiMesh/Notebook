@@ -1,7 +1,7 @@
 ReadeMe:
-Notebook is and application where you can create your notes and save it. You will have an option to sign in or sign up, after which you will lend on homepage, where you will have a graph for a new note and there will be displayed all other note titles. After deciding which note you want to read you can click on title and you will be able to see full note and will be able to delete the not if you want. On top line of the page, there is a navigation bar with logout button and current page name. After clicking on logout button, you will be directed to the login page.
+Notebook is an application where you can create your notes and save it. You will have an option to sign in or sign up, after which you will lend on homepage, where you will have a form for a new note and there will be displayed all other notes.You will be able to delete the not if you want to. On top line of the page, there is a navigation bar with logout button and current page icon. After clicking on logout button, you will be directed to the login page.
 CRUD operations I will be using: READ, POST, DELETE.
-Components: LoginPage, SignUpPage, Header, NoteGallery
+Components: LoginPage, SignUpPage, Header, NoteGallery, AllNotes
 HomePage with NewNoteForm and AllNotes. 
 
 
